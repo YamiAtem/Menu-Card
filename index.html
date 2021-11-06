@@ -11,45 +11,46 @@
   <script src="https://raw.githack.com/fcor/arjs-gestures/master/dist/gestures.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+  <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-firestore.js"></script>
+  <script>
+    const firebase_config = {
+      apiKey: "AIzaSyBcUpEI2remYfdk-UL9XU48ZkmloKhEMKY",
+      authDomain: "menu-card-db1fc.firebaseapp.com",
+      projectId: "menu-card-db1fc",
+      storageBucket: "menu-card-db1fc.appspot.com",
+      messagingSenderId: "907992601258",
+      appId: "1:907992601258:web:d38d01b3d668fb9578b6d3"
+    };
+
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebase_config);
+    } else {
+      firebase.app();
+    }
+  </script>
+
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
 
   <!-- Local StyleSheet -->
   <link href="./style.css" rel="stylesheet" />
-  
+
   <!--Marker Handler Src-->
   <script src="./js/add_button.js"></script>
   <script src="./js/marker_handler.js"></script>
+  <script src="./js/add_marker.js"></script>
 </head>
 
 <body style="margin : 0px; overflow: hidden;">
 
-  <a-scene 
-    embedded vr-mode-ui="enabled: false"     
+  <a-scene id="main-scene" embedded vr-mode-ui="enabled: false"
     arjs="sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960;debugUIEnabled: false;"
-    gesture-detector create-buttons>
+    gesture-detector create-buttons create_markers>
 
     <!-- Camera -->
     <a-entity camera></a-entity>
-
-    <a-assets>
-      <a-asset-item id="pizza-model" src="./assets/pizza/scene.gltf"></a-asset-item>
-    </a-assets>
-    
-    <a-marker id="pizza-marker" marker_handler type="pattern" url="assets/dish-markers/pattern-pizza.patt" cursor="rayOrigin: mouse" >
-      <a-entity id="pizza-3d-model" position="-1 0 0" scale="0.05 0.05 0.05" gltf-model="#pizza-model" gesture-handler></a-entity>
-
-      <a-plane position="0 0 0" width="1.5" height="1.5" rotation="-90 0 0">
-        <a-plane position="0 0.89 0.02" width="1.49" height="0.3" rotation="0 0 0" color="#f0c30f">
-          <a-entity position="0 0 0.1" rotation="0 0 0" text="font:monoid;value:PIZZA MARGHERITA;color:black;width: 1.8;height:1;align:center;"></a-entity>
-        </a-plane>
-         <a-entity position="0 0 0.1" rotation="0 0 0"
-          text="color: black; align: center; width: 2; font: monoid;
-               value: Tomato sauce\n\nMozzarella cheese\n\nParmesan cheese (optional)\n\nFresh Basil\n\nOlive oil\n\nBlack pepper (optional)">
-        </a-entity>
-      </a-plane>
-    </a-marker>
   </a-scene>
 
   <!-- Button Main Div -->
